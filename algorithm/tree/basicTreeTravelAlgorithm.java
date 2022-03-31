@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class basicTreeTravelAlgorithm {
@@ -62,6 +64,73 @@ public class basicTreeTravelAlgorithm {
         }
     }
 
+    /**
+     *中序遍历，非递归
+     */
+    public static void middleTravelNoRecurrence(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()){
+            while (root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            System.out.print(root.val + " ");
+            root = root.right;
+        }
+    }
+
+    /**
+     * 后续遍历，非递归
+     */
+    public static void afterTravelNoRecurrence(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        TreeNode pre = null;
+        while (node != null || !stack.isEmpty()){
+            while (node != null){
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.peek();
+            if (node.right == null || node.right == pre){
+                node = stack.pop();
+                System.out.print(node.val + " ");
+                pre = node;
+                node = null;
+            }else {
+                node = node.right;
+            }
+
+        }
+
+
+    }
+
+    /**
+     *层次遍历
+     */
+    public static void levelTravel(TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        if(root != null){
+            queue.offer(root);
+        }
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i++){
+                root = queue.poll();
+                System.out.print(root.val + " ");
+                if(root.left != null){
+                    queue.offer(root.left);
+                }
+                if(root.right != null){
+                    queue.offer(root.right);
+                }
+            }
+        }
+
+    }
+
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
@@ -78,7 +147,10 @@ public class basicTreeTravelAlgorithm {
 //        preTravel(root);
 //        middleTravel(root);、
 //        afterTravel(root);
-        preTravelNoRecurrence(root);
+//        preTravelNoRecurrence(root);
+//        middleTravelNoRecurrence(root);
+//        levelTravel(root);
+        afterTravelNoRecurrence(root);
 
     }
 
