@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class basicTreeTravelAlgorithm {
+public class BasicTreeTravelAlgorithm {
 
    static class TreeNode{
         TreeNode left;
